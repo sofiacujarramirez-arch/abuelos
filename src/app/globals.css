@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-parchment text-inkwell antialiased;
+  }
+  body {
+    @apply font-body text-body bg-parchment min-h-screen;
+    /* subtle paper grain */
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(139, 110, 74, 0.08) 1px,
+      transparent 0
+    );
+    background-size: 24px 24px;
+  }
+  ::selection {
+    @apply bg-gold/40 text-inkwell;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-inkwell;
+  }
+}
+
+@layer components {
+  .masthead {
+    @apply font-display font-bold uppercase tracking-tight;
+    font-feature-settings: "liga", "dlig";
+  }
+
+  /* Photo print — borde blanco, sombra y leve rotación */
+  .photo-print {
+    @apply bg-white p-3 shadow-photo;
+  }
+  .photo-print-lg {
+    @apply bg-white p-4 shadow-photo-lg;
+  }
+  .tilt-left { transform: rotate(-2deg); }
+  .tilt-right { transform: rotate(2.5deg); }
+  .tilt-left-sm { transform: rotate(-1deg); }
+  .tilt-right-sm { transform: rotate(1deg); }
+
+  /* Pill label */
+  .pill {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-body text-sm font-semibold tracking-wide uppercase;
+  }
+
+  /* Section color-pop variants — one family per section */
+  .pop-letter   { @apply bg-letter-tint text-letter; }
+  .pop-envelope { @apply bg-envelope-tint text-envelope; }
+  .pop-garden   { @apply bg-garden-tint text-garden; }
+
+  /* CTA button — high contrast */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-inkwell text-parchment px-8 py-4 font-body font-semibold text-lg tracking-wide transition-all hover:bg-tobacco focus:outline-none focus:ring-4 focus:ring-gold/40;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-envelope text-parchment px-8 py-4 font-body font-semibold text-lg tracking-wide transition-all hover:bg-envelope/90 focus:outline-none focus:ring-4 focus:ring-envelope-tint;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-inkwell text-inkwell px-8 py-4 font-body font-semibold text-lg tracking-wide transition-all hover:bg-inkwell hover:text-parchment;
+  }
+
+  /* Editorial divider — no thin lines, use thick bar */
+  .rule-bar {
+    @apply w-24 h-1 bg-inkwell;
+  }
+
+  /* Masthead separator like a newspaper nameplate */
+  .nameplate-border {
+    border-top: 3px solid #2A1F0F;
+    border-bottom: 3px solid #2A1F0F;
+  }
+
+  /* Scrapbook tape corner */
+  .tape::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 80px;
+    height: 22px;
+    background: rgba(232, 217, 187, 0.8);
+    box-shadow: 0 1px 2px rgba(42, 31, 15, 0.1);
+  }
+}
