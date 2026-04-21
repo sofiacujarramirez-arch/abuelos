@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { Copy, Share2, UserPlus, MapPin, CalendarDays } from "lucide-react";
+import { MapPin, CalendarDays, Newspaper, PenLine } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { getSignedPhotoUrls } from "@/lib/photos";
 import { WelcomeBanner } from "./_components/welcome-banner";
 import { InvitePanel } from "./_components/invite-panel";
+import { PostCard } from "./_components/post-card";
 
 export default async function FamilyHome({
   params,
@@ -26,7 +28,7 @@ export default async function FamilyHome({
     supabase.from("recipients").select("*").eq("family_id", familyId),
     supabase
       .from("posts")
-      .select("id, message, created_at, author_id")
+      .select("id, message, created_at, event_date, author_id, photos(storage_path, display_order)")
       .eq("family_id", familyId)
       .order("created_at", { ascending: false })
       .limit(10),
@@ -42,6 +44,13 @@ export default async function FamilyHome({
 
   const myMembership = members.find((m) => m.user_id === user.id);
   if (!myMembership) notFound();
+
+  const authorsById = new Map(members.map((m) => [m.user_id, m]));
+
+  const allPaths = posts.flatMap(
+    (p) => ((p.photos as { storage_path: string; display_order: number }[] | null) ?? []).map((ph) => ph.storage_path),
+  );
+  const signedUrls = await getSignedPhotoUrls(allPaths);
 
   const daysUntilTrialEnd = subscription?.current_period_end
     ? Math.max(0, Math.ceil((new Date(subscription.current_period_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
@@ -79,15 +88,26 @@ export default async function FamilyHome({
       </header>
 
       <div className="grid lg:grid-cols-3 gap-12">
-        {/* Main column — feed placeholder */}
+        {/* Main column — feed */}
         <div className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
             <h2 className="font-display text-3xl font-bold">
               <span className="italic font-normal">El</span> muro
             </h2>
-            <button disabled className="btn-primary opacity-50 cursor-not-allowed text-sm px-5 py-3">
-              Publicar (próximamente)
-            </button>
+            <div className="flex gap-3">
+              <Link
+                href={`/app/${familyId}/gaceta`}
+                className="btn-ghost text-sm px-5 py-3 flex items-center gap-2"
+              >
+                <Newspaper className="w-4 h-4" /> Ver la gaceta
+              </Link>
+              <Link
+                href={`/app/${familyId}/post/new`}
+                className="btn-primary text-sm px-5 py-3 flex items-center gap-2"
+              >
+                <PenLine className="w-4 h-4" /> Publicar
+              </Link>
+            </div>
           </div>
 
           {posts.length === 0 ? (
@@ -96,19 +116,31 @@ export default async function FamilyHome({
                 Aún nadie ha publicado.
               </p>
               <p className="font-body italic text-body text-tobacco mb-6">
-                Invita a la familia y comienza a llenar la gaceta.
+                Sube tu primera página — fotos y un mensaje para la abuela.
               </p>
+              <Link href={`/app/${familyId}/post/new`} className="btn-primary inline-flex items-center gap-2">
+                <PenLine className="w-4 h-4" /> Hacer la primera publicación
+              </Link>
             </div>
           ) : (
-            <ul className="space-y-6">
-              {posts.map((p) => (
-                <li key={p.id} className="bg-white border-2 border-inkwell/10 p-6 shadow-photo">
-                  <p className="font-body text-body text-inkwell">{p.message}</p>
-                  <p className="font-body italic text-sm text-tobacco mt-3">
-                    {new Date(p.created_at).toLocaleDateString("es-CO", { day: "numeric", month: "long" })}
-                  </p>
-                </li>
-              ))}
+            <ul className="space-y-8">
+              {posts.map((p) => {
+                const author = authorsById.get(p.author_id);
+                const photos =
+                  (p.photos as { storage_path: string; display_order: number }[] | null) ?? [];
+                return (
+                  <li key={p.id}>
+                    <PostCard
+                      message={p.message}
+                      createdAt={p.created_at}
+                      eventDate={p.event_date}
+                      author={author ? { display_name: author.display_name, relationship: author.relationship } : undefined}
+                      photos={photos}
+                      signedUrls={signedUrls}
+                    />
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
