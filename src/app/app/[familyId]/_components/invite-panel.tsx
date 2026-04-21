@@ -5,21 +5,21 @@ import { Copy, Check, MessageCircle, Mail } from "lucide-react";
 
 export function InvitePanel({
   familyCode,
-  familyName,
+  recipientName,
 }: {
   familyCode: string;
-  familyName: string;
+  recipientName: string;
 }) {
   const [copied, setCopied] = useState(false);
 
   const inviteUrl = typeof window !== "undefined" ? `${window.location.origin}/signup?invite=${familyCode}` : `/signup?invite=${familyCode}`;
 
   const waMessage = encodeURIComponent(
-    `Te uno a la gaceta familiar de ${familyName} en I Love my abuela. Entra con este código: ${familyCode}\n\n${typeof window !== "undefined" ? window.location.origin : ""}/signup?invite=${familyCode}`,
+    `Te invito a unirte al álbum familiar para ${recipientName}, únete por medio de este link ${inviteUrl}`,
   );
-  const emailSubject = encodeURIComponent(`Únete a la gaceta de ${familyName}`);
+  const emailSubject = encodeURIComponent(`Únete al álbum familiar para ${recipientName}`);
   const emailBody = encodeURIComponent(
-    `Hola,\n\nTe invito a unirte a la gaceta familiar de ${familyName}. Es un periódico mensual que todos armamos con fotos y mensajes, y se imprime para la abuela.\n\nCódigo de familia: ${familyCode}\nEnlace: ${inviteUrl}\n\nCon cariño.`,
+    `Te invito a unirte al álbum familiar para ${recipientName}, únete por medio de este link ${inviteUrl}`,
   );
 
   async function copyCode() {

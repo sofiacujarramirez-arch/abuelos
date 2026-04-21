@@ -196,7 +196,10 @@ export default async function FamilyHome({
           )}
 
           {/* Invite panel */}
-          <InvitePanel familyCode={family.code} familyName={family.name} />
+          <InvitePanel
+            familyCode={family.code}
+            recipientName={recipients[0]?.nickname || recipients[0]?.name?.split(" ")[0] || family.name}
+          />
 
           {/* Members */}
           <div>
