@@ -22,16 +22,24 @@ export default async function FamilyHome({
   if (!user) redirect("/login");
 
   // Fetch everything in parallel
-  const [familyRes, membersRes, recipientsRes, postsRes, subRes] = await Promise.all([
+  const [familyRes, membersRes, recipientsRes, postsRes, draftsRes, subRes] = await Promise.all([
     supabase.from("families").select("*").eq("id", familyId).single(),
     supabase.from("memberships").select("*").eq("family_id", familyId).order("joined_at"),
     supabase.from("recipients").select("*").eq("family_id", familyId),
     supabase
       .from("posts")
-      .select("id, message, created_at, event_date, author_id, photos(storage_path, display_order)")
+      .select("id, message, created_at, event_date, status, author_id, photos(storage_path, display_order)")
       .eq("family_id", familyId)
+      .in("status", ["published", "in_gazette"])
       .order("created_at", { ascending: false })
       .limit(10),
+    supabase
+      .from("posts")
+      .select("id, message, created_at, event_date, status, author_id, photos(storage_path, display_order)")
+      .eq("family_id", familyId)
+      .eq("author_id", user.id)
+      .eq("status", "draft")
+      .order("created_at", { ascending: false }),
     supabase.from("subscriptions").select("*").eq("family_id", familyId).single(),
   ]);
 
@@ -40,14 +48,16 @@ export default async function FamilyHome({
   const members = membersRes.data ?? [];
   const recipients = recipientsRes.data ?? [];
   const posts = postsRes.data ?? [];
+  const drafts = draftsRes.data ?? [];
   const subscription = subRes.data;
 
   const myMembership = members.find((m) => m.user_id === user.id);
   if (!myMembership) notFound();
+  const isAdmin = myMembership.role === "owner" || myMembership.role === "admin";
 
   const authorsById = new Map(members.map((m) => [m.user_id, m]));
 
-  const allPaths = posts.flatMap(
+  const allPaths = [...posts, ...drafts].flatMap(
     (p) => ((p.photos as { storage_path: string; display_order: number }[] | null) ?? []).map((ph) => ph.storage_path),
   );
   const signedUrls = await getSignedPhotoUrls(allPaths);
@@ -110,6 +120,36 @@ export default async function FamilyHome({
             </div>
           </div>
 
+          {drafts.length > 0 && (
+            <div className="mb-10">
+              <h3 className="font-display text-xl font-bold mb-4 text-tobacco">
+                <span className="italic font-normal">Tus</span> borradores
+              </h3>
+              <ul className="space-y-6">
+                {drafts.map((p) => {
+                  const photos =
+                    (p.photos as { storage_path: string; display_order: number }[] | null) ?? [];
+                  return (
+                    <li key={p.id}>
+                      <PostCard
+                        postId={p.id}
+                        familyId={familyId}
+                        message={p.message}
+                        createdAt={p.created_at}
+                        eventDate={p.event_date}
+                        status={p.status as "draft"}
+                        author={{ display_name: myMembership.display_name, relationship: myMembership.relationship }}
+                        photos={photos}
+                        signedUrls={signedUrls}
+                        canEdit={true}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+
           {posts.length === 0 ? (
             <div className="bg-white border-2 border-dashed border-inkwell/20 p-10 text-center">
               <p className="font-display italic text-2xl text-tobacco mb-2">
@@ -128,15 +168,20 @@ export default async function FamilyHome({
                 const author = authorsById.get(p.author_id);
                 const photos =
                   (p.photos as { storage_path: string; display_order: number }[] | null) ?? [];
+                const canEdit = p.author_id === user.id || isAdmin;
                 return (
                   <li key={p.id}>
                     <PostCard
+                      postId={p.id}
+                      familyId={familyId}
                       message={p.message}
                       createdAt={p.created_at}
                       eventDate={p.event_date}
+                      status={p.status as "published" | "in_gazette"}
                       author={author ? { display_name: author.display_name, relationship: author.relationship } : undefined}
                       photos={photos}
                       signedUrls={signedUrls}
+                      canEdit={canEdit}
                     />
                   </li>
                 );

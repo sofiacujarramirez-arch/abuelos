@@ -47,6 +47,7 @@ export default async function GazettePreviewPage({
       .from("posts")
       .select("id, message, created_at, event_date, author_id, photos(storage_path, display_order)")
       .eq("family_id", familyId)
+      .in("status", ["published", "in_gazette"])
       .gte("created_at", periodStart.toISOString())
       .lt("created_at", periodEnd.toISOString())
       .order("created_at", { ascending: true }),
