@@ -4,32 +4,32 @@ import { Check } from "lucide-react";
 const plans = [
   {
     name: "Mensual",
-    italic: "The family classic",
+    italic: "El clásico familiar",
     price: "$12",
-    cadence: "/ month",
-    summary: "One gazette a month, delivered anywhere in Colombia.",
-    features: ["28 messages per edition", "12 pages", "Free shipping in Colombia", "PDF archive forever"],
-    cta: "Start mensual",
+    cadence: "/ mes",
+    summary: "Una gaceta al mes, entregada en cualquier parte de Colombia.",
+    features: ["28 mensajes por edición", "12 páginas", "Envío gratis en Colombia", "Archivo PDF para siempre"],
+    cta: "Empezar mensual",
     featured: false,
   },
   {
     name: "Mensual +",
-    italic: "For the big family",
+    italic: "Para la familia grande",
     price: "$16",
-    cadence: "/ month",
-    summary: "A fuller gazette with room for every nieto to say hi.",
-    features: ["36 messages per edition", "16 pages", "Full-page portraits", "Free shipping in Colombia", "PDF archive forever"],
-    cta: "Start mensual +",
+    cadence: "/ mes",
+    summary: "Una gaceta más llena, con espacio para que cada nieto salude.",
+    features: ["36 mensajes por edición", "16 páginas", "Retratos a página completa", "Envío gratis en Colombia", "Archivo PDF para siempre"],
+    cta: "Empezar mensual +",
     featured: true,
   },
   {
     name: "Quincenal",
-    italic: "Twice the love",
+    italic: "El doble de cariño",
     price: "$22",
-    cadence: "/ month",
-    summary: "Two gazettes per month. Because once isn&apos;t enough.",
-    features: ["28 messages × 2 editions", "12 pages each", "Free shipping in Colombia", "Priority printing"],
-    cta: "Start quincenal",
+    cadence: "/ mes",
+    summary: "Dos gacetas al mes. Porque una sola no alcanza.",
+    features: ["28 mensajes × 2 ediciones", "12 páginas cada una", "Envío gratis en Colombia", "Impresión prioritaria"],
+    cta: "Empezar quincenal",
     featured: false,
   },
 ];
@@ -39,13 +39,13 @@ export function Pricing() {
     <section id="pricing" className="py-24 md:py-32 bg-letter text-parchment">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl mx-auto text-center mb-20">
-          <span className="pill bg-letter-tint text-letter mb-6">Pricing</span>
+          <span className="pill bg-letter-tint text-letter mb-6">Precios</span>
           <h2 className="font-display text-display-lg font-black mb-6">
-            <span className="italic font-normal">Simple plans.</span>{" "}
-            <span className="font-black">Cancel anytime.</span>
+            <span className="italic font-normal">Planes sencillos.</span>{" "}
+            <span className="font-black">Cancela cuando quieras.</span>
           </h2>
           <p className="font-body italic text-body-lg text-parchment/80">
-            Pay in USD, EUR, or COP. The family kitty lets tíos and primos split the bill.
+            Paga en USD, EUR o COP. La vaquita familiar deja que tíos y primos se repartan el costo.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export function Pricing() {
             >
               {p.featured && (
                 <span className="absolute -top-4 left-10 pill bg-envelope text-parchment">
-                  Most chosen
+                  El más elegido
                 </span>
               )}
               <p className="font-body italic text-sm uppercase tracking-widest mb-2 opacity-80">
@@ -99,7 +99,7 @@ export function Pricing() {
         </div>
 
         <p className="font-body italic text-center text-parchment/70 mt-12">
-          Want the big gesture? Our <strong className="not-italic font-semibold">Semanal</strong> plan delivers a new gazette every week — $38/mo.
+          ¿Quieres el gesto grande? Nuestro plan <strong className="not-italic font-semibold">Semanal</strong> entrega una gaceta nueva cada semana — $38/mes.
         </p>
       </div>
     </section>

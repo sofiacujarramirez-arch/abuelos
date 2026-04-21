@@ -6,19 +6,19 @@ export function FinalCta() {
     <section className="py-28 md:py-40">
       <div className="mx-auto max-w-5xl px-6 text-center">
         <h2 className="font-display text-display-xl font-black mb-8 leading-none">
-          <span className="italic font-normal">She&apos;s waiting</span>
+          <span className="italic font-normal">Ella está esperando</span>
           <br />
-          <span className="font-black">by the window.</span>
+          <span className="font-black">asomada a la ventana.</span>
         </h2>
         <p className="font-body italic text-body-lg md:text-2xl text-tobacco max-w-2xl mx-auto mb-12 leading-relaxed">
-          Start her gazette today. Your first edition ships within two weeks —
-          just in time for next month&apos;s café with the vecinas.
+          Empieza su gaceta hoy. La primera edición sale en menos de dos semanas —
+          justo a tiempo para el tinto del próximo mes con las vecinas.
         </p>
         <Link href="/signup" className="btn-primary">
-          Start her gazette <ArrowRight className="w-6 h-6" />
+          Empezar su gaceta <ArrowRight className="w-6 h-6" />
         </Link>
         <p className="mt-8 font-body text-base text-tobacco">
-          Free to cancel. No commitment. Pay in USD, EUR, or COP.
+          Cancelas cuando quieras. Sin compromiso. Paga en USD, EUR o COP.
         </p>
       </div>
     </section>

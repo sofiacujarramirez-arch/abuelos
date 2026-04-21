@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { BrandMark } from "@/components/brand-mark";
 import { OnboardingForm } from "./onboarding-form";
 
 export default async function OnboardingPage() {
@@ -25,9 +25,7 @@ export default async function OnboardingPage() {
     <main className="min-h-screen bg-parchment">
       <header className="border-b-2 border-inkwell/10 bg-parchment">
         <div className="max-w-3xl mx-auto px-6 py-5 flex items-center justify-between">
-          <Link href="/" className="font-display font-black text-2xl md:text-3xl">
-            <span className="italic font-normal">I Love my</span> abuela
-          </Link>
+          <BrandMark size="md" />
           <div className="font-body italic text-sm text-tobacco">
             Paso 1 de 1
           </div>

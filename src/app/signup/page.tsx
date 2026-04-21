@@ -11,8 +11,8 @@ export default async function SignupPage({
 
   return (
     <AuthShell
-      italic="Start"
-      title="her gazette."
+      italic="Empieza"
+      title="su gaceta."
       subtitle={
         invite
           ? "Te invitaron a una familia. Crea tu cuenta para unirte."

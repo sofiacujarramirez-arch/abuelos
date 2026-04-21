@@ -11,8 +11,8 @@ export default async function LoginPage({
 
   return (
     <AuthShell
-      italic="Welcome"
-      title="back."
+      italic="Bienvenido"
+      title="de nuevo."
       subtitle="Entra a tu familia. Tu abuela ya te está esperando."
       footer={
         <p>

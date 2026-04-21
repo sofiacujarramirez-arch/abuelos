@@ -11,7 +11,7 @@ export function Hero() {
           <div className="flex items-center justify-between font-body italic text-sm md:text-base text-tobacco">
             <span>Vol. I · No. 001</span>
             <span className="uppercase tracking-widest not-italic font-semibold text-xs md:text-sm">
-              A family gazette — Established with love
+              Una gaceta familiar — hecha con cariño
             </span>
             <span className="hidden md:inline">Edición mensual</span>
           </div>
@@ -21,32 +21,32 @@ export function Hero() {
           {/* Headline block */}
           <div className="lg:col-span-7 relative z-10">
             <span className="pill pop-envelope mb-8 animate-fade-up">
-              <Heart className="w-4 h-4" /> For the diaspora
+              <Heart className="w-4 h-4" /> Para la diáspora
             </span>
 
             <h1 className="font-display text-display-xl font-black text-inkwell mb-8 animate-fade-up">
-              <span className="italic font-normal">Your family,</span>
+              <span className="italic font-normal">Tu familia,</span>
               <br />
-              <span className="font-black">in print.</span>
+              <span className="font-black">en papel.</span>
             </h1>
 
             <p className="font-body italic text-xl md:text-2xl text-tobacco max-w-xl mb-10 leading-relaxed animate-fade-up">
-              A monthly newspaper written by your whole family — photos, stories,
-              cariños — delivered to <span className="not-italic font-semibold text-inkwell">your abuela&apos;s door</span> in Colombia.
+              Un periódico mensual escrito por toda tu familia — fotos, historias,
+              cariños — entregado en <span className="not-italic font-semibold text-inkwell">la puerta de tu abuela</span> en Colombia.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up">
               <Link href="/signup" className="btn-primary">
-                Start her gazette <ArrowRight className="w-5 h-5" />
+                Empezar su gaceta <ArrowRight className="w-5 h-5" />
               </Link>
               <Link href="#how" className="btn-ghost">
-                See how it works
+                Ver cómo funciona
               </Link>
             </div>
 
             <p className="mt-8 font-body text-base text-tobacco animate-fade-up">
-              No apps for <span className="italic">abuela</span>. Just a beautiful paper,
-              landing in her mailbox every month.
+              Sin apps para la <span className="italic">abuela</span>. Solo un periódico bonito,
+              que llega a su buzón cada mes.
             </p>
           </div>
 

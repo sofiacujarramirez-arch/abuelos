@@ -156,7 +156,7 @@ export function GazettePage({
         {/* Colofón */}
         <footer className="border-t-[3px] border-inkwell p-8 text-center">
           <p className="font-body italic text-sm text-tobacco">
-            Hecho con cariño por la familia · I Love my abuela
+            Hecho con cariño por la familia · mi familia
           </p>
         </footer>
       </article>

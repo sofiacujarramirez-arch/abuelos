@@ -19,19 +19,19 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "I Love my abuela — A family newspaper, printed with love",
+  title: "mi familia — una gaceta familiar, impresa con cariño",
   description:
-    "Your family, in print. Photos and messages from everyone — delivered to your abuela as a monthly gazette. Built for the Latin diaspora.",
+    "Tu familia, en papel. Fotos y mensajes de todos — entregados a tu abuela en una gaceta mensual. Hecho para la diáspora latina.",
   openGraph: {
-    title: "I Love my abuela",
-    description: "Your family, in print.",
+    title: "mi familia",
+    description: "Tu familia, en papel.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${lora.variable}`}>
+    <html lang="es" className={`${playfair.variable} ${lora.variable}`}>
       <body>{children}</body>
     </html>
   );

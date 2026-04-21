@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDown, LogOut, Plus, KeyRound } from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 import { logoutAction } from "@/app/app/actions";
 
 type Family = { id: string; name: string; code: string; role: string };
@@ -24,9 +25,7 @@ export function AppNav({
     <nav className="border-b-2 border-inkwell/10 bg-parchment sticky top-0 z-40">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
         <div className="flex items-center gap-8">
-          <Link href="/app" className="font-display font-black text-xl md:text-2xl shrink-0">
-            <span className="italic font-normal">I Love my</span> abuela
-          </Link>
+          <BrandMark href="/app" size="sm" />
           {currentFamily && (
             <>
               <span className="hidden md:inline text-inkwell/30">·</span>

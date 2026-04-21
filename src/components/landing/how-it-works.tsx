@@ -4,23 +4,23 @@ const steps = [
   {
     n: "01",
     icon: Camera,
-    kicker: "Everyone shares",
-    title: "Photos, voice notes, cariños",
-    body: "Invite tíos, primos, nietos, amigos — hasta 60 personas. Each one posts from their phone during the month. Photos of the grandkids, the last trip, birthdays, little moments.",
+    kicker: "Todos comparten",
+    title: "Fotos, notas de voz, cariños",
+    body: "Invita a tíos, primos, nietos, amigos — hasta 60 personas. Cada uno publica desde su celular durante el mes. Fotos de los nietos, el último paseo, cumpleaños, momentos chiquitos.",
   },
   {
     n: "02",
     icon: Newspaper,
-    kicker: "We craft the gazette",
-    title: "A printed family newspaper",
-    body: "On the first Monday of every month, our editors lay out everything into a beautiful 12-page gazette. Big fonts. Warm photos. No apps for abuela — just a paper she can hold.",
+    kicker: "Armamos la gaceta",
+    title: "Un periódico familiar impreso",
+    body: "El primer lunes de cada mes, nuestros editores maquetan todo en una gaceta bonita de 12 páginas. Tipografía grande. Fotos cálidas. Sin apps para la abuela — solo un papel que puede tener en las manos.",
   },
   {
     n: "03",
     icon: Mailbox,
-    kicker: "It lands at her door",
-    title: "Mailed to Colombia, with love",
-    body: "Printed in Bogotá and delivered by courier to any address in Colombia — Barranquilla, Pasto, or the finca in Santander. She opens it with her café and reads you.",
+    kicker: "Llega a su puerta",
+    title: "Enviada a Colombia, con cariño",
+    body: "Impresa en Bogotá y entregada por mensajero a cualquier dirección en Colombia — Barranquilla, Pasto, o la finca en Santander. Ella la abre con su tinto y te lee.",
   },
 ];
 
@@ -29,13 +29,13 @@ export function HowItWorks() {
     <section id="how" className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl mb-20">
-          <span className="pill pop-letter mb-6">How it works</span>
+          <span className="pill pop-letter mb-6">Cómo funciona</span>
           <h2 className="font-display text-display-lg font-black mb-6">
-            <span className="italic font-normal">Three steps.</span>{" "}
-            <span className="font-black">One happy abuela.</span>
+            <span className="italic font-normal">Tres pasos.</span>{" "}
+            <span className="font-black">Una abuela feliz.</span>
           </h2>
           <p className="font-body italic text-body-lg text-tobacco max-w-xl">
-            Designed for busy families scattered across borders — and for grandparents who shouldn&apos;t need a smartphone to feel loved.
+            Pensado para familias ocupadas y repartidas por el mundo — y para abuelos que no deberían necesitar un smartphone para sentirse queridos.
           </p>
         </div>
 

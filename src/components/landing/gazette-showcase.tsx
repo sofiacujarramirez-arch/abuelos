@@ -6,45 +6,45 @@ export function GazetteShowcase() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="pill pop-garden mb-6">The gazette</span>
+            <span className="pill pop-garden mb-6">La gaceta</span>
             <h2 className="font-display text-display-lg font-black mb-6">
-              <span className="italic font-normal">A newspaper</span>
+              <span className="italic font-normal">Un periódico</span>
               <br />
-              <span className="font-black">made of family.</span>
+              <span className="font-black">hecho de familia.</span>
             </h2>
             <p className="font-body italic text-body-lg text-tobacco mb-6">
-              Twelve pages. Large, readable type. A warm, heritage feel — like the
-              weekend papers your abuela grew up with, but this time, the stories are
-              all about her people.
+              Doce páginas. Letra grande, fácil de leer. Un aire cálido y de herencia —
+              como los periódicos de domingo con los que creció tu abuela,
+              pero esta vez, las historias son todas de los suyos.
             </p>
 
             <ul className="space-y-5 font-body text-body text-inkwell">
               <li className="flex gap-4">
                 <span className="font-display text-2xl font-black text-envelope">·</span>
                 <span>
-                  <strong className="font-semibold">Front page</strong>{" "}
-                  <span className="italic text-tobacco">— a portrait of the month and headlines from the family</span>
+                  <strong className="font-semibold">Portada</strong>{" "}
+                  <span className="italic text-tobacco">— un retrato del mes y los titulares de la familia</span>
                 </span>
               </li>
               <li className="flex gap-4">
                 <span className="font-display text-2xl font-black text-envelope">·</span>
                 <span>
-                  <strong className="font-semibold">Spreads</strong>{" "}
-                  <span className="italic text-tobacco">— photos laid out like a real scrapbook, with captions in everyone&apos;s voice</span>
+                  <strong className="font-semibold">Páginas centrales</strong>{" "}
+                  <span className="italic text-tobacco">— fotos maquetadas como un álbum de recortes, con las palabras de cada uno</span>
                 </span>
               </li>
               <li className="flex gap-4">
                 <span className="font-display text-2xl font-black text-envelope">·</span>
                 <span>
-                  <strong className="font-semibold">Calendar</strong>{" "}
-                  <span className="italic text-tobacco">— cumpleaños, santos, fiestas — so she never forgets a nieto</span>
+                  <strong className="font-semibold">Calendario</strong>{" "}
+                  <span className="italic text-tobacco">— cumpleaños, santos, fiestas — para que no se le olvide ningún nieto</span>
                 </span>
               </li>
               <li className="flex gap-4">
                 <span className="font-display text-2xl font-black text-envelope">·</span>
                 <span>
-                  <strong className="font-semibold">Handwritten note</strong>{" "}
-                  <span className="italic text-tobacco">— a personal message on the back cover, signed by the family</span>
+                  <strong className="font-semibold">Nota escrita a mano</strong>{" "}
+                  <span className="italic text-tobacco">— un mensaje personal en la contraportada, firmado por la familia</span>
                 </span>
               </li>
             </ul>

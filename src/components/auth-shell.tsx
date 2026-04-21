@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { BrandMark } from "@/components/brand-mark";
 
 export function AuthShell({
   title,
@@ -18,9 +18,7 @@ export function AuthShell({
     <main className="min-h-screen grid md:grid-cols-2">
       {/* Brand side */}
       <aside className="hidden md:flex bg-envelope text-parchment p-12 flex-col justify-between">
-        <Link href="/" className="font-display font-black text-3xl">
-          <span className="italic font-normal">I Love my</span> abuela
-        </Link>
+        <BrandMark tone="light" size="lg" />
         <blockquote>
           <p className="font-display italic text-3xl lg:text-4xl leading-tight mb-6">
             &ldquo;Cada mes espero el periódico de la familia más que las novelas.&rdquo;
@@ -37,9 +35,9 @@ export function AuthShell({
       {/* Form side */}
       <section className="flex flex-col justify-center px-6 md:px-16 py-12 bg-parchment">
         <div className="w-full max-w-md mx-auto">
-          <Link href="/" className="md:hidden font-display font-black text-2xl mb-12 block">
-            <span className="italic font-normal">I Love my</span> abuela
-          </Link>
+          <div className="md:hidden mb-12">
+            <BrandMark size="md" />
+          </div>
           <h1 className="font-display text-display-md font-black mb-3 leading-tight">
             <span className="italic font-normal">{italic}</span>{" "}
             <span className="font-black">{title}</span>
