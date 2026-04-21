@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Plus } from "lucide-react";
+import { Plus, KeyRound } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function AppHome() {
@@ -46,6 +46,17 @@ export default async function AppHome() {
             </Link>
           );
         })}
+
+        <Link
+          href="/app/join"
+          className="flex flex-col items-center justify-center bg-parchment border-2 border-dashed border-inkwell/30 hover:border-inkwell transition p-8 min-h-[180px] text-center"
+        >
+          <KeyRound className="w-8 h-8 text-tobacco mb-2" />
+          <span className="font-display text-xl font-bold">Unirme con un código</span>
+          <span className="font-body italic text-body text-tobacco mt-1">
+            ¿Te invitaron a otra familia?
+          </span>
+        </Link>
 
         <Link
           href="/onboarding"

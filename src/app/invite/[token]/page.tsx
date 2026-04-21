@@ -15,11 +15,10 @@ export default async function InvitePage({
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/login?next=/invite/${token}`);
 
-  const { data: family } = await supabase
-    .from("families")
-    .select("id, name, code")
-    .eq("code", code)
-    .maybeSingle();
+  const { data: lookup } = await supabase.rpc("lookup_family_by_code", {
+    code_in: code,
+  });
+  const family = Array.isArray(lookup) ? lookup[0] : null;
 
   if (!family) {
     return (

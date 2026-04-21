@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDown, LogOut, Plus } from "lucide-react";
+import { ChevronDown, LogOut, Plus, KeyRound } from "lucide-react";
 import { logoutAction } from "@/app/app/actions";
 
 type Family = { id: string; name: string; code: string; role: string };
@@ -69,6 +69,13 @@ export function AppNav({
                   ))}
                 </div>
               )}
+              <Link
+                href="/app/join"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 font-body text-inkwell hover:bg-cream transition"
+              >
+                <KeyRound className="w-4 h-4" /> Unirme con un código
+              </Link>
               <Link
                 href="/onboarding"
                 onClick={() => setMenuOpen(false)}

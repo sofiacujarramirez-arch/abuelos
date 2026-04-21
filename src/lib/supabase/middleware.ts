@@ -43,7 +43,13 @@ export async function updateSession(request: NextRequest) {
 
   if (user && isAuthPage) {
     const url = request.nextUrl.clone();
-    url.pathname = "/app";
+    const inviteCode = request.nextUrl.searchParams.get("invite");
+    if (inviteCode) {
+      url.pathname = `/invite/${inviteCode}`;
+      url.search = "";
+    } else {
+      url.pathname = "/app";
+    }
     return NextResponse.redirect(url);
   }
 
