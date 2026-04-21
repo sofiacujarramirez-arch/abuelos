@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getSignedPhotoUrls } from "@/lib/photos";
 import { GazettePage } from "./gazette-page";
+import { SharePanel } from "./share-panel";
 
 const MONTHS_ES = [
   "enero", "febrero", "marzo", "abril", "mayo", "junio",
@@ -59,6 +61,15 @@ export default async function GazettePreviewPage({
   const members = membersRes.data ?? [];
   const posts = postsRes.data ?? [];
 
+  const { data: edition } = await supabase
+    .rpc("get_or_create_edition", { fid: familyId, y: year, m: month })
+    .maybeSingle<{ edition_id: string; public_slug: string; period_start: string; period_end: string; status: string }>();
+
+  const hdrs = await headers();
+  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const publicUrl = edition?.public_slug ? `${proto}://${host}/g/${edition.public_slug}` : null;
+
   const authorsById = new Map(members.map((m) => [m.user_id, m]));
 
   const allPaths = posts.flatMap(
@@ -89,10 +100,22 @@ export default async function GazettePreviewPage({
         >
           <ArrowLeft className="w-4 h-4" /> Volver
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <p className="font-body italic text-tobacco">
             Gaceta de {monthLabel} · {posts.length} {posts.length === 1 ? "entrada" : "entradas"}
           </p>
+          <a
+            href={`/app/${familyId}/gaceta/pdf?month=${month}&year=${year}`}
+            className="btn-ghost text-sm px-4 py-2 inline-flex items-center gap-2"
+          >
+            <Download className="w-4 h-4" /> PDF
+          </a>
+          {publicUrl && (
+            <SharePanel
+              publicUrl={publicUrl}
+              whatsappText={`Hola ${recipient?.term_of_endearment ?? "abuela"}${recipient?.nickname ? " " + recipient.nickname : ""}, te comparto la gaceta de ${monthLabel} de la familia.`}
+            />
+          )}
           <form method="get" className="flex items-center gap-2">
             <select
               name="month"

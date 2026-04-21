@@ -6,6 +6,7 @@ import { getSignedPhotoUrls } from "@/lib/photos";
 import { WelcomeBanner } from "./_components/welcome-banner";
 import { InvitePanel } from "./_components/invite-panel";
 import { PostCard } from "./_components/post-card";
+import { GazetteArchive } from "./_components/gazette-archive";
 
 export default async function FamilyHome({
   params,
@@ -22,7 +23,7 @@ export default async function FamilyHome({
   if (!user) redirect("/login");
 
   // Fetch everything in parallel
-  const [familyRes, membersRes, recipientsRes, postsRes, draftsRes, subRes] = await Promise.all([
+  const [familyRes, membersRes, recipientsRes, postsRes, draftsRes, subRes, editionsRes] = await Promise.all([
     supabase.from("families").select("*").eq("id", familyId).single(),
     supabase.from("memberships").select("*").eq("family_id", familyId).order("joined_at"),
     supabase.from("recipients").select("*").eq("family_id", familyId),
@@ -41,6 +42,11 @@ export default async function FamilyHome({
       .eq("status", "draft")
       .order("created_at", { ascending: false }),
     supabase.from("subscriptions").select("*").eq("family_id", familyId).single(),
+    supabase
+      .from("editions")
+      .select("id, period_start, public_slug")
+      .eq("family_id", familyId)
+      .order("period_start", { ascending: false }),
   ]);
 
   if (familyRes.error || !familyRes.data) notFound();
@@ -50,6 +56,11 @@ export default async function FamilyHome({
   const posts = postsRes.data ?? [];
   const drafts = draftsRes.data ?? [];
   const subscription = subRes.data;
+  const editions = editionsRes.data ?? [];
+
+  const now = new Date();
+  const currentMonth = now.getMonth() + 1;
+  const currentYear = now.getFullYear();
 
   const myMembership = members.find((m) => m.user_id === user.id);
   if (!myMembership) notFound();
@@ -244,6 +255,14 @@ export default async function FamilyHome({
           <InvitePanel
             familyCode={family.code}
             recipientName={recipients[0]?.nickname || recipients[0]?.name?.split(" ")[0] || family.name}
+          />
+
+          {/* Gazette archive */}
+          <GazetteArchive
+            familyId={familyId}
+            editions={editions}
+            currentMonth={currentMonth}
+            currentYear={currentYear}
           />
 
           {/* Members */}
